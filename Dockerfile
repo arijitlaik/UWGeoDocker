@@ -14,7 +14,7 @@ RUN useradd -m -s /bin/bash -N jovyan
 
 # copy this file over so that no password is required
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop nano tmux openssh-client ne 
+RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop nano tmux ne 
 
 # install lavavu
 RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
