@@ -13,7 +13,7 @@ ENV NB_USER jovyan
 RUN useradd -m -s /bin/bash -N jovyan
 
 # copy this file over so that no password is required
-COPY docs/development/docker/underworld2_untested/jupyter_notebook_config.json /home/$NB_USER/.jupyter/jupyter_notebook_config.json
+#COPY docs/development/docker/underworld2_untested/jupyter_notebook_config.json /home/$NB_USER/.jupyter/jupyter_notebook_config.json
 
 # install lavavu
 RUN pip install --no-cache-dir lavavu
@@ -99,5 +99,5 @@ WORKDIR /workspace
 RUN find -name \*.ipynb  -print0 | xargs -0 jupyter trust
 
 # launch notebook
-CMD ["jupyter", "notebook", "--ip='*'", "--no-browser"]
+#CMD ["jupyter", "notebook", "--ip='*'", "--no-browser"]
 
