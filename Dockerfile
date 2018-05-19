@@ -17,8 +17,8 @@ COPY docs/development/docker/underworld2_untested/jupyter_notebook_config.json /
 
 # install lavavu
 RUN git clone https://github.com/OKaluza/LavaVu && \
-    cd LavaVu
-    make -j4
+    cd LavaVu  && \
+    make -j4  
 ENV PYTHONPATH $PYTHONPATH:/opt/LavaVu
 
 # COPY UW
