@@ -4,7 +4,7 @@ MAINTAINER laikarijit@gmail.com
 USER root
 
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo
+RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop
 
 # UWGeodynamics
 WORKDIR /opt
