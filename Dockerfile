@@ -20,7 +20,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop nano tmux ne -
 # install lavavu
 RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
     cd LavaVu  && \
-    make -j8  &&
+    make -j8  && \
     cd ..
 
 # COPY UW
