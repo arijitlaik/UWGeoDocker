@@ -22,14 +22,13 @@ RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
     cd LavaVu  && \
     make -j8  && \
     cd ..
-RUN ls
-RUN ls $UW2_DIR/
-RUN ls $UW2_DIR/underworld2
+WORKDIR /opt
 # COPY UW
 #COPY --chown=jovyan:users . $UW2_DIR/   # unfortunately, the version of docker at docker cloud does not support chown yet.
 #COPY . $UW2_DIR/
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
-RUN cd underworld2/libUnderworld && \
+RUN git clone --branch development --single-branch https://github.com/underworldcode/underworld2 && \
+    cd underworld2/libUnderworld && \
     ./configure.py --with-debugging=0  && \
     ./compile.py                 && \
     rm -fr h5py_ext              && \
@@ -51,11 +50,10 @@ RUN cd underworld2/libUnderworld && \
     rsync -av $UW2_DIR/docs/. $NB_WORK                               && \
     cd /opt/underworld2                                              && \
     find . -name \*.os |xargs rm -f                                  && \
-    cat .git/refs/heads/* > build_commit.txt                         && \
+    git rev-parse --verify HEAD > build_commit.txt                   && \
     env > build_environment.txt                                      && \
     rm -fr .git                                                      && \
     chown -R $NB_USER:users $NB_WORK $UW2_DIR /home/$NB_USER
-
 
 # kiwisolver hack, and pipe down numpy warnings
 RUN sed -i "1i import kiwisolver as _ks;import warnings as _warnings;_warnings.filterwarnings(\"ignore\")" /opt/underworld2/underworld/__init__.py
