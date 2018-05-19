@@ -25,9 +25,10 @@ ENV PYTHONPATH $PYTHONPATH:/opt/LavaVu
 # COPY UW
 #COPY --chown=jovyan:users . $UW2_DIR/   # unfortunately, the version of docker at docker cloud does not support chown yet.
 COPY . $UW2_DIR/
+RUN ls /opt/
 
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
-RUN cd $UW2_DIR2/libUnderworld && \
+RUN cd /opt/underworld2/libUnderworld && \
     ./configure.py --with-debugging=0  && \
     ./compile.py                 && \
     rm -fr h5py_ext              && \
