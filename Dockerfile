@@ -9,8 +9,8 @@ ENV PYTHONPATH $PYTHONPATH:$UW2_DIR
 ENV NB_WORK /workspace
 
 # add default user jovyan and change permissions on NB_WORK
-ENV NB_USER jovyan
-RUN useradd -m -s /bin/bash -N jovyan
+#ENV NB_USER jovyan
+#RUN useradd -m -s /bin/bash -N jovyan
 
 # copy this file over so that no password is required
 #COPY docs/development/docker/underworld2_untested/jupyter_notebook_config.json /home/$NB_USER/.jupyter/jupyter_notebook_config.json
@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir lavavu
 COPY . $UW2_DIR/
 
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
-RUN cd underworld2/libUnderworld && \
+RUN cd /opt/underworld2/libUnderworld && \
     ./configure.py --with-debugging=0  && \
     ./compile.py                 && \
     rm -fr h5py_ext              && \
