@@ -14,10 +14,10 @@ RUN useradd -m -s /bin/bash -N jovyan
 
 # copy this file over so that no password is required
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop nano tmux openssh-client ne libsqlite3-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop nano tmux openssh-client ne 
 
 # install lavavu
-RUN git clone https://github.com/OKaluza/LavaVu && \
+RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
     cd LavaVu  && \
     make -j4  
 ENV PYTHONPATH $PYTHONPATH:/opt/LavaVu
