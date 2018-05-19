@@ -24,7 +24,7 @@ RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
     cd ..
 WORKDIR /opt
 # COPY UW
-#COPY --chown=jovyan:users . $UW2_DIR/   # unfortunately, the version of docker at docker cloud does not support chown yet.
+COPY --chown=jovyan:users . $UW2_DIR/   # unfortunately, the version of docker at docker cloud does not support chown yet.
 #COPY . $UW2_DIR/
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
 RUN git clone --branch development --single-branch https://github.com/underworldcode/underworld2 && \
@@ -136,7 +136,7 @@ ENV NB_USER jovyan
 COPY jupyter_notebook_config.json /home/$NB_USER/.jupyter/jupyter_notebook_config.json
 
 # update all permissions for user
-#RUN chown -R $NB_USER:users /workspace $UW2_DIR /home/$NB_USER /opt/pyBadlands_serial
+RUN chown -R $NB_USER:users /workspace $UW2_DIR /home/$NB_USER 
 
 # change user and update pythonpath
 USER $NB_USER
