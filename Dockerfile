@@ -13,6 +13,8 @@ ENV NB_USER jovyan
 RUN useradd -m -s /bin/bash -N jovyan
 
 # copy this file over so that no password is required
+RUN apt-get update -qq
+RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop nano tmux openssh-client ne libsqlite3-dev
 
 # install lavavu
 RUN git clone https://github.com/OKaluza/LavaVu && \
@@ -78,8 +80,6 @@ CMD ["jupyter", "notebook", "--ip='*'", "--no-browser"]
 
 USER root
 
-RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop nano tmux openssh-client ne
 
 # UWGeodynamics
 WORKDIR /opt
