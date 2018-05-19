@@ -27,7 +27,7 @@ ENV PYTHONPATH $PYTHONPATH:/opt/LavaVu
 COPY . $UW2_DIR/
 
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
-RUN cd underworld2/libUnderworld && \
+RUN cd $UW2_DIR2/libUnderworld && \
     ./configure.py --with-debugging=0  && \
     ./compile.py                 && \
     rm -fr h5py_ext              && \
@@ -75,7 +75,6 @@ VOLUME $NB_WORK/user_data
 WORKDIR $NB_WORK
 
 # launch notebook
-CMD ["jupyter", "notebook", "--ip='*'", "--no-browser"]
 
 
 USER root
