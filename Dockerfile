@@ -2,8 +2,8 @@ FROM underworldcode/base@sha256:59e242b34ea610784838232b93b81799828a3c59a25946e0
 MAINTAINER https://github.com/underworldcode/
 
 # set working directory to /opt, and install underworld files there.
-WORKDIR /opt
-ENV UW2_DIR /opt/underworld2
+RUN mkdir uwdev
+ENV UW2_DIR uwdev
 RUN mkdir $UW2_DIR
 ENV PYTHONPATH $PYTHONPATH:$UW2_DIR
 ENV NB_WORK /workspace
@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir lavavu
 COPY . $UW2_DIR/
 
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
-RUN cd /opt/underworld2/libUnderworld && \
+RUN cd $UW2_DIR && \
     ./configure.py --with-debugging=0  && \
     ./compile.py                 && \
     rm -fr h5py_ext              && \
@@ -43,7 +43,7 @@ RUN cd /opt/underworld2/libUnderworld && \
     sphinx-build . ../../api_doc                                     && \
     mkdir $NB_WORK                                                   && \
     rsync -av $UW2_DIR/docs/. $NB_WORK                               && \
-    cd /opt/underworld2                                              && \
+    cd UW2_DIR                                                       && \
     find . -name \*.os |xargs rm -f                                  && \
     cat .git/refs/heads/* > build_commit.txt                         && \
     env > build_environment.txt                                      && \
