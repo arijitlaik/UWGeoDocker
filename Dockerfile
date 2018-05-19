@@ -2,7 +2,6 @@ FROM underworldcode/base@sha256:59e242b34ea610784838232b93b81799828a3c59a25946e0
 MAINTAINER https://github.com/underworldcode/
 
 # set working directory to /opt, and install underworld files there.
-RUN mkdir uwdev
 ENV UW2_DIR uwdev
 RUN mkdir $UW2_DIR
 ENV PYTHONPATH $PYTHONPATH:$UW2_DIR
