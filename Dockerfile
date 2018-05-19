@@ -7,6 +7,7 @@ ENV UW2_DIR /opt/underworld2
 RUN mkdir $UW2_DIR
 ENV PYTHONPATH $PYTHONPATH:$UW2_DIR
 ENV NB_WORK /workspace
+ENV PYTHONPATH $PYTHONPATH:/opt/LavaVu
 
 # add default user jovyan and change permissions on NB_WORK
 ENV NB_USER jovyan
@@ -19,14 +20,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop nano tmux ne -
 # install lavavu
 RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
     cd LavaVu  && \
-    make -j4  
-ENV PYTHONPATH $PYTHONPATH:/opt/LavaVu
+    make -j8  &&
+    cd ..
 
 # COPY UW
 #COPY --chown=jovyan:users . $UW2_DIR/   # unfortunately, the version of docker at docker cloud does not support chown yet.
 COPY . $UW2_DIR/
-RUN ls /opt/
-WORKDIR /opt
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
 RUN cd underworld2/libUnderworld && \
     ./configure.py --with-debugging=0  && \
@@ -67,6 +66,7 @@ EXPOSE 9999
 # CHANGE USER
 USER $NB_USER
 ENV PYTHONPATH $PYTHONPATH:$UW2_DIR
+ENV PYTHONPATH $PYTHONPATH:/opt/LavaVu
 
 # setup symlink for terminal convenience
 RUN ln -s $NB_WORK /home/$NB_USER/
