@@ -15,8 +15,7 @@ RUN useradd -m -s /bin/bash -N jovyan
 
 # copy this file over so that no password is required
 RUN apt-get update -qq
-RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop texlive-xetex pandoc  -y
-RUN DEBIAN_FRONTEND=noninteractive wget http://os.ghalkes.nl/sources.list.d/install_repo.sh && sh ./install_repo.sh ; apt-get install tilde -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install cgdb sudo htop texlive-xetex pandoc ne nano -y
 
 # install lavavu
 RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
