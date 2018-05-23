@@ -25,7 +25,7 @@ RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
 
 # COPY UW
 #COPY --chown=jovyan:users /opt $UW2_DIR/   # unfortunately, the version of docker at docker cloud does not support chown yet.
-COPY . $UW2_DIR/
+#COPY . $UW2_DIR/
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
 RUN git clone --branch development --single-branch https://github.com/underworldcode/underworld2 && \
     cd underworld2/libUnderworld && \
