@@ -22,10 +22,10 @@ RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
     cd LavaVu  && \
     make -j8  && \
     cd ..
-WORKDIR /opt
+
 # COPY UW
 #COPY --chown=jovyan:users /opt $UW2_DIR/   # unfortunately, the version of docker at docker cloud does not support chown yet.
-#COPY . $UW2_DIR/
+COPY . $UW2_DIR/
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
 RUN git clone --branch development --single-branch https://github.com/underworldcode/underworld2 && \
     cd underworld2/libUnderworld && \
@@ -91,35 +91,6 @@ RUN rsync -av /opt/UWGeodynamics/examples/* /workspace/UWGeodynamics/examples/
 RUN rsync -av /opt/UWGeodynamics/tutorials/* /workspace/UWGeodynamics/tutorials/
 RUN rsync -av /opt/UWGeodynamics/manual/* /workspace/UWGeodynamics/manual/
 
-# # Badlands dependency
-# RUN pip install pandas
-# RUN pip install ez_setup
-# RUN pip install git+https://github.com/badlands-model/triangle.git
-# RUN pip install git+https://github.com/awickert/gFlex.git
-
-# # pyBadlands serial
-# WORKDIR /opt
-# RUN git clone https://github.com/rbeucher/pyBadlands_serial.git
-# RUN pip install -e pyBadlands_serial/
-# WORKDIR /opt/pyBadlands_serial/pyBadlands/libUtils
-# RUN make
-# RUN pip install -e /opt/pyBadlands_serial
-
-# # pyBadlands dependencies
-# RUN pip install cmocean
-# RUN pip install colorlover
-# # Force matplotlib 2.1.2 (Bug Badlands), Temporary
-# RUN pip install matplotlib==2.1.2
-
-# pyBadlands companion
-# WORKDIR /opt
-# RUN git clone https://github.com/badlands-model/pyBadlands-Companion.git
-# RUN pip install -e /opt/pyBadlands-Companion
-# RUN mkdir /workspace/BADLANDS
-# RUN rsync -av /opt/pyBadlands-Companion/notebooks/* /workspace/BADLANDS/companion/
-
-# ENV PATH $PATH:/opt/pyBadlands_serial/pyBadlands/libUtils
-# ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/opt/pyBadlands_serial/pyBadlands/libUtils
 
 # memory profiler and jupyterlab
 RUN pip install memory_profiler
