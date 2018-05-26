@@ -93,8 +93,7 @@ RUN rsync -av /opt/UWGeodynamics/manual/* /workspace/UWGeodynamics/manual/
 
 
 # memory profiler and jupyterlab
-RUN pip install memory_profiler
-RUN pip install jupyterlab
+RUN pip install memory_profiler jupyterlab
 RUN jupyter serverextension enable --py jupyterlab --sys-prefix
 
 # update all permissions for jovyan user
