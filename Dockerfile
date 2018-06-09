@@ -3,6 +3,7 @@ MAINTAINER https://github.com/underworldcode/
 
 # set working directory to /opt, and install underworld files there.
 WORKDIR /opt
+RUN ls
 ENV UW2_DIR /opt/underworld2
 RUN mkdir $UW2_DIR
 ENV PYTHONPATH $PYTHONPATH:$UW2_DIR
