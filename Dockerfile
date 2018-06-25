@@ -84,7 +84,7 @@ USER root
 
 # UWGeodynamics
 WORKDIR /opt
-RUN git clone -b development https://github.com/arijitlaik/UWGeodynamics.git
+RUN git clone -b CustomNL https://github.com/arijitlaik/UWGeodynamics.git 
 RUN pip install -e /opt/UWGeodynamics
 RUN mkdir /workspace/UWGeodynamics
 RUN mkdir /workspace/MODELS_RESULTS
