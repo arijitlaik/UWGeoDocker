@@ -82,7 +82,7 @@ WORKDIR $NB_WORK
 USER root
 
 
-# UWGeodynamics
+# UWGeodynamics Custom Non Linear Solver
 WORKDIR /opt
 RUN git clone -b CustomNL https://github.com/arijitlaik/UWGeodynamics.git 
 RUN pip install -e /opt/UWGeodynamics
