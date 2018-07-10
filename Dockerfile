@@ -28,7 +28,7 @@ RUN git clone --recurse-submodules -j8 https://github.com/OKaluza/LavaVu && \
 #COPY --chown=jovyan:users /opt $UW2_DIR/   # unfortunately, the version of docker at docker cloud does not support chown yet.
 #COPY . $UW2_DIR/
 # get underworld, compile, delete some unnecessary files, trust notebooks, copy to workspace
-RUN git clone --branch revise_viscosityFn_Arijit --single-branch https://github.com/underworldcode/underworld2 && \
+RUN git clone --branch development --single-branch https://github.com/underworldcode/underworld2 && \
     cd underworld2/libUnderworld && \
     ./configure.py --with-debugging=0  && \
     ./compile.py                 && \
@@ -84,7 +84,7 @@ USER root
 
 # UWGeodynamics
 WORKDIR /opt
-RUN git clone -b development https://github.com/arijitlaik/UWGeodynamics.git 
+RUN git clone -b revise_viscosityFn_Arijit  https://github.com/arijitlaik/UWGeodynamics.git 
 RUN pip install -e /opt/UWGeodynamics
 RUN mkdir /workspace/UWGeodynamics
 RUN mkdir /workspace/MODELS_RESULTS
